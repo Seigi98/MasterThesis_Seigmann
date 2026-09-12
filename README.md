@@ -1,8 +1,8 @@
 # Multimodal Accessibility Analysis in Salzburg
 
-This repository contains the Python scripts used for the GIS-based multimodal accessibility analysis conducted as part of a Master's thesis at the University of Salzburg in 2026.
+This repository contains the Python scripts and technical documentation used for the GIS-based multimodal accessibility analysis conducted as part of a Master's thesis at the University of Salzburg in 2026.
 
-The study compares accessibility by ** car, bus and Park & Ride (P&R)** in the Flachgau region of Salzburg. Accessibility is evaluated using three main indicators:
+The study compares accessibility by **car, bus and Park & Ride (P&R)** in the Flachgau region of Salzburg. Accessibility is evaluated using three main indicators:
 
 - travel time
 - travel costs
@@ -29,5 +29,15 @@ Six temporal scenarios were analysed:
 - Saturday morning
 - Saturday afternoon
 
-The final comparison is based on 70,935 residential origins.
+The final comparison is based on **70,935 residential origins**.
 
+## Repository Structure
+
+```text
+scripts/
+│
+├── Appendix_A_Network_Dataset_Properties.txt
+├── Appendix_B_Address_Data_Cleaning.py
+├── Appendix_C_Street_Network_Cleaning.py
+├── Appendix_D_EVIS_Integration.py
+└── Appendix_E_Final_Multimodal_Result_Table.py
