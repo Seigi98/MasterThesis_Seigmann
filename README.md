@@ -31,13 +31,3 @@ Six temporal scenarios were analysed:
 
 The final comparison is based on 70,935 residential origins.
 
-## Repository Structure
-
-```text
-scripts/
-│
-├── Appendix_B_Address_Data_Cleaning.py
-├── Appendix_C_Street_Network_Cleaning.py
-├── Appendix_D_EVIS_Integration.py
-├── Appendix_E_Travel_Mode_Definition.py
-└── Appendix_F_Result_Table_Generation.py
