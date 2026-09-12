@@ -1,0 +1,321 @@
+Data Type: File Geodatabase Network Dataset
+Database: 
+  C:\Users\Hanne\Documents\Data\MasterThesis_Structured\04_Geodatabase\
+  MasterThesis_Main.gdb
+Feature Dataset: NetworkDataset_Car
+Network: StreetNetwork_ND
+Minimum Client Version: 1.0 / 10.1
+Dataset Version: 10.1
+
+Build Status: Built
+  The network dataset has been built.
+  Build Time: Sat Jan 10 13:18:54 2026
+
+  Edges: 175920
+  Junctions: 73252
+  Turns: 0
+
+Sources: 
+  Edge Sources: 
+    LINKNETZ_Clean_New: 
+      Object Class ID: 21
+      Network Source ID: 1
+  Junction Sources: 
+    StreetNetwork_ND_Junctions: 
+      Object Class ID: 22
+      Network Source ID: 2
+
+Connectivity: 
+  Policies: 
+    LINKNETZ_Clean_New edges use End Point connectivity policy.
+
+Travel Attributes: 
+  Travel Modes: 
+    Default Travel Mode: Car_Mo_Morning
+    Travel Mode: Car_Mo_Morning
+      Description: 
+        Collection of network dataset settings that define actions that are allowed on the
+        network and how the actions can be performed.
+      Type: Automobile
+      Uses Costs: 
+        Impedance: Car_Mo_Morning
+        Distance Cost: Length
+      Uses Restrictions: 
+        Car_Allowed: Prohibited
+      Allowed U-turns: All
+    Travel Mode: Walk
+      Description: 
+        Collection of network dataset settings that define actions that are allowed on the
+        network and how the actions can be performed.
+      Type: Walk
+      Uses Costs: 
+        Impedance: Walk
+        Distance Cost: Length
+      Allowed U-turns: All
+    Travel Mode: Car_Cost_EUR
+      Description: 
+        Collection of network dataset settings that define actions that are allowed on the
+        network and how the actions can be performed.
+      Type: OTHER
+      Uses Costs: 
+        Impedance: Car_Mo_Freeflow
+        Distance Cost: Length
+      Uses Restrictions: 
+        Car_Allowed: Prohibited
+      Allowed U-turns: All
+    Travel Mode: Co2_Emission
+      Description: 
+        Collection of network dataset settings that define actions that are allowed on the
+        network and how the actions can be performed.
+      Type: OTHER
+      Uses Costs: 
+        Impedance: CO2_g_km
+        Time Cost: Car_Mo_Freeflow
+        Distance Cost: Length
+      Uses Restrictions: 
+        Car_Allowed: Prohibited
+      Allowed U-turns: All
+  Costs: 
+    Cost: Car_Fr_Evening
+      Network Attribute ID: 8
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !FR_RUSH_EVENING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !FR_RUSH_EVENING_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Fr_Freeflow
+      Network Attribute ID: 9
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !FR_FREEFLOW_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !FR_FREEFLOW_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Fr_Morning
+      Network Attribute ID: 10
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !FR_RUSH_MORNING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !MO_FREEFLOW_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Mo_Evening
+      Network Attribute ID: 3
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !MO_RUSH_EVENING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # or some very high value to effectively prohibit travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !MO_RUSH_EVENING_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # or some very high value to effectively prohibit travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Mo_Freeflow
+      Network Attribute ID: 4
+      Units: Minutes
+      Data Type: double
+      Used By Travel Modes: 
+        Impedance: Car_Cost_EUR
+        Time Cost: Co2_Emission
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !MO_FREEFLOW_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !MO_FREEFLOW_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Mo_Morning
+      Network Attribute ID: 2
+      Units: Minutes
+      Data Type: double
+      Used By Travel Modes: 
+        Impedance: Car_Mo_Morning
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !MO_RUSH_MORNING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !MO_RUSH_MORNING_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Sa_Evening
+      Network Attribute ID: 13
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !SA_RUSH_EVENING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !SA_RUSH_EVENING_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Sa_Freeflow
+      Network Attribute ID: 12
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !SA_FREEFLOW_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !SA_FREEFLOW_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Car_Sa_Morning
+      Network Attribute ID: 11
+      Units: Minutes
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Value: safe_time(!geom!, !SA_RUSH_MORNING_TOW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Value: safe_time(!geom!, !SA_RUSH_MORNING_BKW!)
+          Code Block: 
+            def safe_time(length_m, speed_kmh):
+                if speed_kmh is None or speed_kmh <= 0:
+                    return 9999  # effectively prohibits travel
+                return (length_m / 1000.0) / speed_kmh * 60
+    Cost: Walk
+      Network Attribute ID: 5
+      Units: Minutes
+      Data Type: double
+      Used By Travel Modes: 
+        Impedance: Walk
+      Evaluators: 
+        LINKNETZ_Clean_New (Bi-Directional): Field Script (Python)
+          Value: (!geom! / 1000.0) / !WALK_SPEED! * 60
+    Cost: Length
+      Network Attribute ID: 1
+      Units: Meters
+      Data Type: double
+      Used By Travel Modes: 
+        Distance Cost: 
+          Car_Cost_EUR
+          Car_Mo_Morning
+          Co2_Emission
+          Walk
+      Evaluators: 
+        LINKNETZ_Clean_New (Bi-Directional): Field Script (Python)
+          Value: !geom! / 1000
+    Cost: Car_Cost_EUR
+      Network Attribute ID: 14
+      Units: Other
+      Data Type: double
+      Evaluators: 
+        LINKNETZ_Clean_New (Bi-Directional): Field Script (Python)
+          Value: !geom! / 1000.0 * 0.0725
+    Cost: CO2_g_km
+      Network Attribute ID: 6
+      Units: Other
+      Data Type: float
+      Used By Travel Modes: 
+        Impedance: Co2_Emission
+      Evaluators: 
+        LINKNETZ_Clean_New (Bi-Directional): Field Script (Python)
+          Value: !geom! / 1000 * 161.9
+  Restrictions: 
+    Restriction: Car_Allowed
+      Network Attribute ID: 7
+      Default Usage: Prohibited
+      Used By Travel Modes: 
+        Car_Cost_EUR: Prohibited
+        Car_Mo_Morning: Prohibited
+        Co2_Emission: Prohibited
+      Evaluators: 
+        LINKNETZ_Clean_New (Along): Field Script (Python)
+          Restrict Where: check_car_allowed(!CAR_TOW!, !CAR_BKW!, "along")
+          Code Block: 
+            def check_car_allowed(car_tow, car_bkw, direction):
+                if direction == "along":
+                    return car_tow != 1   # restrict if NOT allowed
+                elif direction == "against":
+                    return car_bkw != 1   # restrict if NOT allowed
+                else:
+                    return True
+        LINKNETZ_Clean_New (Against): Field Script (Python)
+          Restrict Where: check_car_allowed(!CAR_TOW!, !CAR_BKW!, "against")
+          Code Block: 
+            def check_car_allowed(car_tow, car_bkw, direction):
+                if direction == "along":
+                    return car_tow != 1   # restrict if NOT allowed
+                elif direction == "against":
+                    return car_bkw != 1   # restrict if NOT allowed
+                else:
+                    return True
