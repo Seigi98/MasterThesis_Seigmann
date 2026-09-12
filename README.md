@@ -2,7 +2,7 @@
 
 This repository contains the Python scripts used for the GIS-based multimodal accessibility analysis conducted as part of a Master's thesis at the University of Salzburg in 2026.
 
-The study compares accessibility by **private car, bus and Park & Ride (P&R)** in the Flachgau region of Salzburg. Accessibility is evaluated using three main indicators:
+The study compares accessibility by ** car, bus and Park & Ride (P&R)** in the Flachgau region of Salzburg. Accessibility is evaluated using three main indicators:
 
 - travel time
 - travel costs
